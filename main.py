@@ -48,14 +48,14 @@ if __name__ == "__main__":
     )
 
     for tweet in response.iter_lines():
+        # TODO: log posted tweet and unexpected error
         try:
             serialized_tweet: dict = json.loads(tweet)
             # type sage serialize
-            if "retweeted_status" in serialized_tweet:
-                print("rt")
+            if not serialized_tweet["user"]["id"] == os.environ[EnvironKeys.twitter_id]:
+                print("others")
                 continue
 
-            print(tweet)
             tweet_text     : str       = serialized_tweet["text"]
             tweet_username : str       = serialized_tweet["user"]["name"]
             tweet_image_url: str       = serialized_tweet["user"]["profile_image_url"]
