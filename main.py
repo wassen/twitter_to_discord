@@ -52,7 +52,7 @@ if __name__ == "__main__":
         try:
             serialized_tweet: dict = json.loads(tweet)
             # type sage serialize
-            if not serialized_tweet["user"]["id"] == os.environ[EnvironKeys.twitter_id]:
+            if not str(serialized_tweet["user"]["id"]) == os.environ[EnvironKeys.twitter_id]:
                 print("others")
                 continue
 
