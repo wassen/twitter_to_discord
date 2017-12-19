@@ -62,6 +62,13 @@ if __name__ == "__main__":
                 print("others")
                 continue
 
+            # クソコード
+            # TODO: quotedで引用元の情報が消えるが
+            if "retweeted_status" in serialized_tweet:
+                serialized_tweet = serialized_tweet["retweeted_status"]
+            elif "quoted_status" in serialized_tweet:
+                serialized_tweet = serialized_tweet["quoted_status"]
+
             tweet_text     : str       = html.unescape(serialized_tweet["text"])
             tweet_username : str       = serialized_tweet["user"]["name"]
             tweet_image_url: str       = serialized_tweet["user"]["profile_image_url"]
