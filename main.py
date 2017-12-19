@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import json
 import os
+import html
 import requests
 from requests_oauthlib import OAuth1  # ,OAuth1Session
 from typing import Dict, List
@@ -56,7 +57,7 @@ if __name__ == "__main__":
                 print("others")
                 continue
 
-            tweet_text     : str       = serialized_tweet["text"]
+            tweet_text     : str       = html.unescape(serialized_tweet["text"])
             tweet_username : str       = serialized_tweet["user"]["name"]
             tweet_image_url: str       = serialized_tweet["user"]["profile_image_url"]
             media_url_list : List[str] = [media["media_url"] for media in serialized_tweet["entities"].get("media", [])]
