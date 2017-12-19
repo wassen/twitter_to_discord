@@ -17,6 +17,11 @@ class EnvironKeys:
     discord_webhook_url = "DISCORD_WEBHOOK_URL"
 
 
+def log(tweet: str):
+    with open(os.path.join(os.path.dirname(__file__), "tweet_json.log"), "a") as f:
+        print(tweet, file=f)
+
+
 def postToDiscord(content       : str,
                   username      : str,
                   image_url     : str,
@@ -71,9 +76,9 @@ if __name__ == "__main__":
                 image_url     =tweet_image_url,
                 media_url_list=media_url_list,
             )
-            print(tweet_text)
+            log(tweet)
         except json.decoder.JSONDecodeError:
-            print(tweet)
+            pass
         except:
             print("unexpected")
-            print(tweet)
+            log(tweet)
